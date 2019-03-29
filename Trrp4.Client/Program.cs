@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Trrp4.Client
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        /// <summary>
+        /// Главная точка входа для приложения.
+        /// </summary>
+        [STAThread]
+        public static void Main()
         {
-
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new AuthorizationForm());
         }
     }
 }

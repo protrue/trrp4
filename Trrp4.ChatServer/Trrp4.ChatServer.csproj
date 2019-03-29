@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trrp4.Shared\Trrp4.Shared.csproj">
+      <Project>{6baf449f-c01e-42ec-b627-7b0d18d5110b}</Project>
+      <Name>Trrp4.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

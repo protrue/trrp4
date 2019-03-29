@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Client", "Trrp4.Client\Trrp4.Client.csproj", "{DCF1F248-D125-4B2D-B889-308C3968CCF3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.AuthServer", "Trrp4.AuthServer\Trrp4.AuthServer.csproj", "{93D14C6C-DAAD-479A-958C-C719ADB91610}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.ChatServer", "Trrp4.ChatServer\Trrp4.ChatServer.csproj", "{B13FA0A3-1247-418E-B3A3-6DA069DA55D0}"
@@ -13,16 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Dispatcher", "Trrp4.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Shared", "Trrp4.Shared\Trrp4.Shared.csproj", "{6BAF449F-C01E-42EC-B627-7B0D18D5110B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Client", "Trrp4.Client\Trrp4.Client.csproj", "{00B869D9-F3E0-4310-A78D-748A471B1F85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.LocalApp", "Trrp4.LocalApp\Trrp4.LocalApp.csproj", "{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DCF1F248-D125-4B2D-B889-308C3968CCF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCF1F248-D125-4B2D-B889-308C3968CCF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCF1F248-D125-4B2D-B889-308C3968CCF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCF1F248-D125-4B2D-B889-308C3968CCF3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{93D14C6C-DAAD-479A-958C-C719ADB91610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{93D14C6C-DAAD-479A-958C-C719ADB91610}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D14C6C-DAAD-479A-958C-C719ADB91610}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +37,14 @@ Global
 		{6BAF449F-C01E-42EC-B627-7B0D18D5110B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BAF449F-C01E-42EC-B627-7B0D18D5110B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BAF449F-C01E-42EC-B627-7B0D18D5110B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
