@@ -16,7 +16,7 @@ namespace Trrp4.Client.Resources
         public Bitmap Photo { get; set; }
         //Возможно нужны еще поля
 
-        Member(Bitmap _photo, string _name, string _address, int _characteristic)
+        public Member(Bitmap _photo, string _name, string _address, int _characteristic)
         {
             Photo = _photo;
             Name = _name;

@@ -13,12 +13,47 @@ namespace Trrp4.Client
 {
     public partial class ChatForm : Form
     {
-        public Chat Chat;
+        Chat Chat;
+        Member user;
+        ChatServerConnection chatServerConnection;
 
-        public ChatForm(Chat _chat)
+        public ChatForm(Chat _chat, Member user, ChatServerConnection chatServerConnection)
         {
             InitializeComponent();
             Chat = _chat;
+        }
+
+        public void fillMessageList()
+        {
+            var messages = Chat.Messages;
+            messages.Reverse();
+            foreach(var message in messages)
+            {
+                var item = new ListViewItem("");
+                item.Tag = message;
+                messagesLV.Items.Add(item);
+            }
+        }
+
+        private void messageSendBtn_Click(object sender, EventArgs e)
+        {
+            var message = new ChatMessage(user, messageTB.Text);
+            Chat.AddMessage(message);
+            var item = new ListViewItem(messageTB.Text);
+            item.Tag = message;
+            messagesLV.Items.Add(item);
+        }
+
+        private void messageTB_TextChanged(object sender, EventArgs e)
+        {
+            if(messageTB.Text == string.Empty)
+            {
+                messageSendBtn.Enabled = false;
+            }
+            else
+            {
+                messageSendBtn.Enabled = true;
+            }
         }
     }
 }

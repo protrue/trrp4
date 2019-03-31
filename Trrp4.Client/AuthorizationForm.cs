@@ -22,6 +22,7 @@ namespace Trrp4.Client
             try
             {
                 DispatherConnection = new DispatherConnection();
+                AuthorizationServerConection = new AuthorizationServerConection(DispatherConnection.GetAuthorizationServerAddress());
             }
             catch (Exception e)
             {
@@ -49,7 +50,13 @@ namespace Trrp4.Client
             //Получить ответ (пока ответ не будет получен, все действия заблокированны)
             //Ответ положительный: открыть основное окно приложения
             //Ответ отрицательный: сообщить о неправильном логине и пароле
-            var form = new MainForm(DispatherConnection, AuthorizationServerConection);
+            
+            AuthorizationServerConection.Authenticate(loginTB.Text, passwordTB.Text);
+            //Это должно возвращать 
+            var address = "адрес чат-сервера";
+            var token = "токен для подключения";
+            var chatServerConection = new ChatServerConnection(address, token);
+            var form = new MainForm(DispatherConnection, AuthorizationServerConection, chatServerConection);
             Hide();    
             form.ShowDialog();
             Close();

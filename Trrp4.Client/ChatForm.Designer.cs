@@ -50,6 +50,7 @@
             this.messageTB.Name = "messageTB";
             this.messageTB.Size = new System.Drawing.Size(271, 74);
             this.messageTB.TabIndex = 1;
+            this.messageTB.TextChanged += new System.EventHandler(this.messageTB_TextChanged);
             // 
             // messageSendBtn
             // 
@@ -60,6 +61,7 @@
             this.messageSendBtn.TabIndex = 2;
             this.messageSendBtn.Text = "Отправить";
             this.messageSendBtn.UseVisualStyleBackColor = true;
+            this.messageSendBtn.Click += new System.EventHandler(this.messageSendBtn_Click);
             // 
             // ChatForm
             // 

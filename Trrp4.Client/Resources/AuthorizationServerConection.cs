@@ -24,5 +24,11 @@ namespace Trrp4.Client.Resources
         {
 
         }
+
+        public List<Member> GetMemberList()
+        {
+            var memberList = new List<Member>();
+            return memberList;
+        }
     }
 }
