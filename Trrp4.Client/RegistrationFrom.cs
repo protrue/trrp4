@@ -1,16 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.Resources;
 
-namespace Trrp4.Client
+namespace Client
 {
     public partial class RegistrationFrom : Form
     {
+        DispatherConnection DispatherConnection;
+        AuthorizationServerConection AuthorizationServerConection;
+
         public string Login { get { return loginTB.Text; } }
 
-        public RegistrationFrom()
+        public RegistrationFrom(DispatherConnection _dispatherConnection, AuthorizationServerConection _authorizationServerConection)
         {
             InitializeComponent();
             registerBtn.Enabled = false;
+            DispatherConnection = _dispatherConnection;
+            AuthorizationServerConection = _authorizationServerConection;
         }
 
         private void registerBtn_Click(object sender, EventArgs e)

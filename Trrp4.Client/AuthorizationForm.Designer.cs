@@ -1,4 +1,4 @@
-﻿namespace Trrp4.Client
+﻿namespace Client
 {
     partial class AuthorizationForm
     {
