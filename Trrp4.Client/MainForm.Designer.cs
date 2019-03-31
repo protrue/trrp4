@@ -132,6 +132,7 @@
             this.chatsLV.Size = new System.Drawing.Size(302, 334);
             this.chatsLV.TabIndex = 0;
             this.chatsLV.UseCompatibleStateImageBehavior = false;
+            this.chatsLV.DoubleClick += new System.EventHandler(this.chatsLV_DoubleClick);
             // 
             // tabPage3
             // 
