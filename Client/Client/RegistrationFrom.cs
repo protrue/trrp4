@@ -7,17 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.Resources;
 
 namespace Client
 {
     public partial class RegistrationFrom : Form
     {
+        DispatherConnection DispatherConnection;
+        AuthorizationServerConection AuthorizationServerConection;
+
         public string Login { get { return loginTB.Text; } }
 
-        public RegistrationFrom()
+        public RegistrationFrom(DispatherConnection _dispatherConnection, AuthorizationServerConection _authorizationServerConection)
         {
             InitializeComponent();
             registerBtn.Enabled = false;
+            DispatherConnection = _dispatherConnection;
+            AuthorizationServerConection = _authorizationServerConection;
         }
 
         private void registerBtn_Click(object sender, EventArgs e)

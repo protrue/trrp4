@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.Resources;
 
 namespace Client
 {
-    public partial class WorkingForm : Form
+    public partial class ChatForm : Form
     {
-        public WorkingForm()
+        public Chat Chat;
+
+        public ChatForm(Chat _chat)
         {
             InitializeComponent();
+            Chat = _chat;
         }
     }
 }

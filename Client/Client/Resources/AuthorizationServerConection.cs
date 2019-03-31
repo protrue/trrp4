@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Client.Resources
 {
-    class ServerConnection
+    public class AuthorizationServerConection
     {
-
-        string Address { get; }
+        public string Address { get; }
     }
 }
