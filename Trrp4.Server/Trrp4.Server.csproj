@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{93D14C6C-DAAD-479A-958C-C719ADB91610}</ProjectGuid>
+    <ProjectGuid>{A73E115C-CE1F-4A9F-BCE9-7747591C7F05}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Trrp4.AuthServer</RootNamespace>
-    <AssemblyName>Trrp4.AuthServer</AssemblyName>
+    <RootNamespace>Trrp4.Server</RootNamespace>
+    <AssemblyName>Trrp4.Server</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,8 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,13 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthServer.cs" />
+    <Compile Include="IAuthService.cs" />
+    <Compile Include="ChatServer.cs" />
+    <Compile Include="IChatService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Trrp4.Objects\Trrp4.Objects.csproj">
+      <Project>{83670716-ad10-444b-878b-7e9a35ede32e}</Project>
+      <Name>Trrp4.Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trrp4.Shared\Trrp4.Shared.csproj">
       <Project>{6baf449f-c01e-42ec-b627-7b0d18d5110b}</Project>
       <Name>Trrp4.Shared</Name>

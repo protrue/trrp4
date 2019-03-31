@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.AuthServer", "Trrp4.AuthServer\Trrp4.AuthServer.csproj", "{93D14C6C-DAAD-479A-958C-C719ADB91610}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.ChatServer", "Trrp4.ChatServer\Trrp4.ChatServer.csproj", "{B13FA0A3-1247-418E-B3A3-6DA069DA55D0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Dispatcher", "Trrp4.Dispatcher\Trrp4.Dispatcher.csproj", "{2FB12AA5-A7DC-44F0-87EB-146942064CF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Shared", "Trrp4.Shared\Trrp4.Shared.csproj", "{6BAF449F-C01E-42EC-B627-7B0D18D5110B}"
@@ -15,20 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Client", "Trrp4.Clien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.LocalApp", "Trrp4.LocalApp\Trrp4.LocalApp.csproj", "{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Server", "Trrp4.Server\Trrp4.Server.csproj", "{A73E115C-CE1F-4A9F-BCE9-7747591C7F05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Objects", "Trrp4.Objects\Trrp4.Objects.csproj", "{83670716-AD10-444B-878B-7E9A35EDE32E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.DebugCli", "Trrp4.DebugCli\Trrp4.DebugCli.csproj", "{941A2418-9D22-47D0-836A-244371A83EEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{93D14C6C-DAAD-479A-958C-C719ADB91610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93D14C6C-DAAD-479A-958C-C719ADB91610}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93D14C6C-DAAD-479A-958C-C719ADB91610}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93D14C6C-DAAD-479A-958C-C719ADB91610}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B13FA0A3-1247-418E-B3A3-6DA069DA55D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B13FA0A3-1247-418E-B3A3-6DA069DA55D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B13FA0A3-1247-418E-B3A3-6DA069DA55D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B13FA0A3-1247-418E-B3A3-6DA069DA55D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FB12AA5-A7DC-44F0-87EB-146942064CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FB12AA5-A7DC-44F0-87EB-146942064CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FB12AA5-A7DC-44F0-87EB-146942064CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +39,18 @@ Global
 		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A73E115C-CE1F-4A9F-BCE9-7747591C7F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73E115C-CE1F-4A9F-BCE9-7747591C7F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73E115C-CE1F-4A9F-BCE9-7747591C7F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73E115C-CE1F-4A9F-BCE9-7747591C7F05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83670716-AD10-444B-878B-7E9A35EDE32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83670716-AD10-444B-878B-7E9A35EDE32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83670716-AD10-444B-878B-7E9A35EDE32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83670716-AD10-444B-878B-7E9A35EDE32E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{941A2418-9D22-47D0-836A-244371A83EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{941A2418-9D22-47D0-836A-244371A83EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{941A2418-9D22-47D0-836A-244371A83EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{941A2418-9D22-47D0-836A-244371A83EEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

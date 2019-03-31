@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Trrp4.ChatServer")]
+[assembly: AssemblyTitle("Trrp4.Server")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Trrp4.ChatServer")]
+[assembly: AssemblyProduct("Trrp4.Server")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b13fa0a3-1247-418e-b3a3-6da069da55d0")]
+[assembly: Guid("a73e115c-ce1f-4a9f-bce9-7747591c7f05")]
 
 // Version information for an assembly consists of the following four values:
 //

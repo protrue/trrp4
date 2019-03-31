@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e5eaaed0-dcf0-446c-8bea-0892a3ea1121" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8080/dispatcher" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="dispatcher.xsd" MetadataType="Schema" ID="dd806b96-bcc3-451f-9934-18c9d30f46dc" SourceId="1" SourceUrl="http://localhost:8080/dispatcher?xsd=xsd4" />
+    <MetadataFile FileName="dispatcher.disco" MetadataType="Disco" ID="135b3be7-576c-4dd5-9fed-004dc00f68d2" SourceId="1" SourceUrl="http://localhost:8080/dispatcher?disco" />
+    <MetadataFile FileName="Dispatcher.wsdl" MetadataType="Wsdl" ID="830f5b37-3426-4e31-a45a-e974c386f804" SourceId="1" SourceUrl="http://localhost:8080/dispatcher?wsdl" />
+    <MetadataFile FileName="dispatcher1.xsd" MetadataType="Schema" ID="a2eb6f85-9518-4777-9ea0-7dd95573d750" SourceId="1" SourceUrl="http://localhost:8080/dispatcher?xsd=xsd3" />
+    <MetadataFile FileName="dispatcher2.xsd" MetadataType="Schema" ID="cd02d3df-fcf1-4c9a-8107-bc34a9c2ba80" SourceId="1" SourceUrl="http://localhost:8080/dispatcher?xsd=xsd2" />
+    <MetadataFile FileName="dispatcher3.xsd" MetadataType="Schema" ID="93db5698-619a-4967-9471-af81e62dfd8c" SourceId="1" SourceUrl="http://localhost:8080/dispatcher?xsd=xsd1" />
+    <MetadataFile FileName="dispatcher4.xsd" MetadataType="Schema" ID="b633fdd2-a105-4270-b31c-2740309dcaf3" SourceId="1" SourceUrl="http://localhost:8080/dispatcher?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

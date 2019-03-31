@@ -24,7 +24,6 @@ namespace Trrp4.LocalApp
             {
                 Console.WriteLine("AuthServer thread started");
 
-                AuthServer.Program.Main(new string[0]);
 
                 Console.WriteLine("Dispatcher thread stopped");
             }).Start();
@@ -33,7 +32,6 @@ namespace Trrp4.LocalApp
             {
                 Console.WriteLine("ChatServer thread started");
 
-                ChatServer.Program.Main(new string[0]);
 
                 Console.WriteLine("Dispatcher thread stopped");
             }).Start();

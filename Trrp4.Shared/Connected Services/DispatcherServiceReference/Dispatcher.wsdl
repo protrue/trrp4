@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Dispatcher" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8080/dispatcher?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8080/dispatcher?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/dispatcher?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Net" />
+      <xsd:import schemaLocation="http://localhost:8080/dispatcher?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Net.Sockets" />
+      <xsd:import schemaLocation="http://localhost:8080/dispatcher?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDispatcherService_GetBestChatServers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBestChatServers" />
+  </wsdl:message>
+  <wsdl:message name="IDispatcherService_GetBestChatServers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBestChatServersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDispatcherService_GetBestAuthServers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBestAuthServers" />
+  </wsdl:message>
+  <wsdl:message name="IDispatcherService_GetBestAuthServers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBestAuthServersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDispatcherService_GetServerByClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServerByClient" />
+  </wsdl:message>
+  <wsdl:message name="IDispatcherService_GetServerByClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServerByClientResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDispatcherService">
+    <wsdl:operation name="GetBestChatServers">
+      <wsdl:input wsam:Action="http://tempuri.org/IDispatcherService/GetBestChatServers" message="tns:IDispatcherService_GetBestChatServers_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDispatcherService/GetBestChatServersResponse" message="tns:IDispatcherService_GetBestChatServers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBestAuthServers">
+      <wsdl:input wsam:Action="http://tempuri.org/IDispatcherService/GetBestAuthServers" message="tns:IDispatcherService_GetBestAuthServers_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDispatcherService/GetBestAuthServersResponse" message="tns:IDispatcherService_GetBestAuthServers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServerByClient">
+      <wsdl:input wsam:Action="http://tempuri.org/IDispatcherService/GetServerByClient" message="tns:IDispatcherService_GetServerByClient_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IDispatcherService/GetServerByClientResponse" message="tns:IDispatcherService_GetServerByClient_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDispatcherService" type="tns:IDispatcherService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBestChatServers">
+      <soap:operation soapAction="http://tempuri.org/IDispatcherService/GetBestChatServers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBestAuthServers">
+      <soap:operation soapAction="http://tempuri.org/IDispatcherService/GetBestAuthServers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServerByClient">
+      <soap:operation soapAction="http://tempuri.org/IDispatcherService/GetServerByClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Dispatcher">
+    <wsdl:port name="BasicHttpBinding_IDispatcherService" binding="tns:BasicHttpBinding_IDispatcherService">
+      <soap:address location="http://localhost:8080/dispatcher" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B13FA0A3-1247-418E-B3A3-6DA069DA55D0}</ProjectGuid>
+    <ProjectGuid>{941A2418-9D22-47D0-836A-244371A83EEA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Trrp4.ChatServer</RootNamespace>
-    <AssemblyName>Trrp4.ChatServer</AssemblyName>
+    <RootNamespace>Trrp4.DebugCli</RootNamespace>
+    <AssemblyName>Trrp4.DebugCli</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
