@@ -14,7 +14,7 @@ namespace Trrp4.Client.Resources
         
         public Chat(Member _member, string _lastMessage)
         {
-            ChatConnection = new ChatConnection();
+            //ChatConnection = new ChatConnection();
             Member = _member;
             LastMessage = _lastMessage;
         }

@@ -17,6 +17,11 @@ namespace Trrp4.Client
         Member user;
         ChatServerConnection chatServerConnection;
 
+        public ChatForm(Chat chat)
+        {
+            Chat = chat;
+        }
+
         public ChatForm(Chat _chat, Member user, ChatServerConnection chatServerConnection)
         {
             InitializeComponent();
