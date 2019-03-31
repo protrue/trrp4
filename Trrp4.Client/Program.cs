@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Trrp4.Client
 {
-    public static class Program
+    public class Program
     {
         /// <summary>
         /// Главная точка входа для приложения.

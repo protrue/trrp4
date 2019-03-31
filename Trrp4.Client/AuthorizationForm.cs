@@ -1,18 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Trrp4.Client.Resources;
 
 namespace Trrp4.Client
 {
     public partial class AuthorizationForm : Form
     {
+        DispatherConnection DispatherConnection;
+        AuthorizationServerConection AuthorizationServerConection;
+       
         public AuthorizationForm()
         {
             InitializeComponent();
+            try
+            {
+                DispatherConnection = new DispatherConnection();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Невозможно подключиться к северу\n\n Текст ошибки: " + e.ToString());
+                Close();
+            }
         }
 
         private void registrationLL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var regForm = new RegistrationFrom();
+            var regForm = new RegistrationFrom(DispatherConnection, AuthorizationServerConection);
             if(regForm.ShowDialog() == DialogResult.OK)
             {
                 loginTB.Text = regForm.Login;
@@ -29,10 +49,10 @@ namespace Trrp4.Client
             //Получить ответ (пока ответ не будет получен, все действия заблокированны)
             //Ответ положительный: открыть основное окно приложения
             //Ответ отрицательный: сообщить о неправильном логине и пароле
-            var form = new WorkingForm();
-            this.Hide();    
+            var form = new MainForm(DispatherConnection, AuthorizationServerConection);
+            Hide();    
             form.ShowDialog();
-            this.Close();
+            Close();
         }
 
         private void some_TextChanged(object sender, EventArgs e)
