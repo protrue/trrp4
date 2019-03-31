@@ -8,12 +8,18 @@ namespace Trrp4.Client.Resources
 {
     class ChatConnection
     {
-        public int ChatId { get; }
+        //public int ChatId { get; }
         public string ServerAddress { get; }
+        private string Token;
 
-        public ChatConnection(int _id)
+        public ChatConnection(/*int _id*/)
         {
-            ChatId = _id;
+            //ChatId = _id;
+        }
+
+        public void SendMessage()
+        {
+
         }
     }
 }
