@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Client.Resources
+namespace Trrp4.Client.Resources
 {
     public class DispatherConnection
     {

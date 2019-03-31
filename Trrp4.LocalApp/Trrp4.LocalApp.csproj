@@ -59,7 +59,7 @@
       <Name>Trrp4.ChatServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Trrp4.Client\Trrp4.Client.csproj">
-      <Project>{00b869d9-f3e0-4310-a78d-748a471b1f85}</Project>
+      <Project>{239159ff-f6c8-45e6-b328-b60b2266b73f}</Project>
       <Name>Trrp4.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Trrp4.Dispatcher\Trrp4.Dispatcher.csproj">

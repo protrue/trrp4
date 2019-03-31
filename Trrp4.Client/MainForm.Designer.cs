@@ -1,4 +1,4 @@
-﻿namespace Client
+﻿namespace Trrp4.Client
 {
     partial class MainForm
     {

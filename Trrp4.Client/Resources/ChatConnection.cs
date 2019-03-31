@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Resources
+namespace Trrp4.Client.Resources
 {
     class ChatConnection
     {

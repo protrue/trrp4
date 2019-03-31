@@ -11,9 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Dispatcher", "Trrp4.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Shared", "Trrp4.Shared\Trrp4.Shared.csproj", "{6BAF449F-C01E-42EC-B627-7B0D18D5110B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Client", "Trrp4.Client\Trrp4.Client.csproj", "{00B869D9-F3E0-4310-A78D-748A471B1F85}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.LocalApp", "Trrp4.LocalApp\Trrp4.LocalApp.csproj", "{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}"
+	ProjectSection(ProjectDependencies) = postProject
+		{239159FF-F6C8-45E6-B328-B60B2266B73F} = {239159FF-F6C8-45E6-B328-B60B2266B73F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trrp4.Client", "Trrp4.Client\Trrp4.Client.csproj", "{239159FF-F6C8-45E6-B328-B60B2266B73F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +40,14 @@ Global
 		{6BAF449F-C01E-42EC-B627-7B0D18D5110B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BAF449F-C01E-42EC-B627-7B0D18D5110B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BAF449F-C01E-42EC-B627-7B0D18D5110B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00B869D9-F3E0-4310-A78D-748A471B1F85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{406EFEEF-7BD1-4BCF-B4C5-A2E0567B1607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{239159FF-F6C8-45E6-B328-B60B2266B73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{239159FF-F6C8-45E6-B328-B60B2266B73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{239159FF-F6C8-45E6-B328-B60B2266B73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{239159FF-F6C8-45E6-B328-B60B2266B73F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

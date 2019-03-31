@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Client.Resources;
+using Trrp4.Client.Resources;
 
-namespace Client
+namespace Trrp4.Client
 {
     public partial class ChatForm : Form
     {
