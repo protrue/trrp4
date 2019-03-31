@@ -17,5 +17,8 @@ namespace Trrp4.Server
 
         [OperationContract]
         AccessKey Auth(UserInfo userInfo, IPEndPoint chatServer);
+
+        [OperationContract]
+        void Logout(AccessKey accessKey, IPEndPoint chatServer);
     }
 }

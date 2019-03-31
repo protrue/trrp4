@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="94cf497d-d2ea-48ce-8d8e-716e5ee8bfc3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8085/chatservice" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="chatservice.xsd" MetadataType="Schema" ID="5c5aa13f-c4da-4ccc-825d-8f729665fb53" SourceId="1" SourceUrl="http://localhost:8085/chatservice?xsd=xsd0" />
+    <MetadataFile FileName="chatservice.disco" MetadataType="Disco" ID="8ade8bc8-092b-4ee1-81ac-f4443e81ab56" SourceId="1" SourceUrl="http://localhost:8085/chatservice?disco" />
+    <MetadataFile FileName="chatservice1.xsd" MetadataType="Schema" ID="140f25e4-97f5-482e-a12d-2584e4af0751" SourceId="1" SourceUrl="http://localhost:8085/chatservice?xsd=xsd2" />
+    <MetadataFile FileName="chatservice2.xsd" MetadataType="Schema" ID="3084a256-cc39-404e-92b4-5e0516038845" SourceId="1" SourceUrl="http://localhost:8085/chatservice?xsd=xsd1" />
+    <MetadataFile FileName="ChatServer.wsdl" MetadataType="Wsdl" ID="03b436fc-bebb-4abc-a94a-de524576d938" SourceId="1" SourceUrl="http://localhost:8085/chatservice?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

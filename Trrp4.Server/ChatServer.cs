@@ -6,17 +6,28 @@ using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using Trrp4.Objects;
 using Trrp4.Shared;
+using Trrp4.Shared.ChatServiceReference;
+using Trrp4.Shared.DispatcherServiceReference;
+using AccessKey = Trrp4.Objects.AccessKey;
+using Message = Trrp4.Objects.Message;
+using Timer = System.Timers.Timer;
 
 namespace Trrp4.Server
 {
-    public class ChatServer : IChatService
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    public class ChatServer : IChatService, IDisposable
     {
-        public IPEndPoint LocalEndPoint { get; set; }
+        public IPEndPoint NotifierEndPoint { get; set; }
+        public IPEndPoint ListenerEndPoint { get; set; }
         public IPEndPoint DispatcherEndPoint { get; set; }
+        public DispatcherServiceClient DispatcherServiceClient { get; set; }
+
+        public Thread ListenerThread { get; set; }
 
         public BinaryFormatter BinaryFormatter { get; set; }
         public List<AccessKey> AccessKeys { get; set; }
@@ -25,12 +36,26 @@ namespace Trrp4.Server
 
         public int DispatcherNotifyPeriodMilliseconds { get; set; }
         public Timer DispatcherNotifierTimer { get; set; }
+        public UdpClient DispatcherNotifierUdpClient { get; set; }
 
         public ChatServer()
         {
             ConnectedClients = new Dictionary<int, TcpClient>();
             AddresseeRoutes = new Dictionary<int, IPEndPoint>();
             BinaryFormatter = new BinaryFormatter();
+
+            NotifierEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8085);
+            ListenerEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8085);
+            DispatcherEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
+
+            ListenerThread = new Thread(Listen);
+
+            DispatcherNotifierUdpClient = new UdpClient(NotifierEndPoint);
+
+            DispatcherServiceClient = new DispatcherServiceClient(
+                new BasicHttpBinding(BasicHttpSecurityMode.None),
+                new EndpointAddress($"http://{DispatcherEndPoint.Address}:{DispatcherEndPoint.Port}/dispatcher"));
+            DispatcherServiceClient.Open();
 
             DispatcherNotifyPeriodMilliseconds = 1000;
             DispatcherNotifierTimer = new Timer(1);
@@ -39,51 +64,74 @@ namespace Trrp4.Server
 
         private void NotifyDispatcher(object sender, ElapsedEventArgs e)
         {
-            var udp = new UdpClient(LocalEndPoint);
-            udp.Send(new byte[] { 0, (byte)ConnectedClients.Count }, 2, DispatcherEndPoint);
+            DispatcherNotifierUdpClient.Send(new byte[] { 0, (byte)ConnectedClients.Count }, 2, DispatcherEndPoint);
         }
 
-        public void Start(string ip, int port)
+        public void Listen()
         {
-            var tcp = new TcpListener(IPAddress.Parse(ip), port);
+            var tcpListener = new TcpListener(ListenerEndPoint);
+            tcpListener.Start();
 
-            var tcpClient = tcp.AcceptTcpClient();
-            var networkStream = tcpClient.GetStream();
-
-            var dataObject = BinaryFormatter.Deserialize(networkStream);
-
-            if (dataObject is AccessKey accessKey)
+            while (true)
             {
-                if (AccessKeys.Contains(accessKey))
-                    ConnectedClients[accessKey.UserId] = tcpClient;
-                else
-                    tcpClient.Close();
-            }
+                var tcpClient = tcpListener.AcceptTcpClient();
 
-            if (dataObject is Message message)
-            {
-                if (!ConnectedClients.ContainsKey(message.Sender) && !ConnectedClients.ContainsKey(message.Addressee))
-                    tcpClient.Close();
-
-                var chatContext = new ChatContext();
-                chatContext.Messages.Add(message);
-
-                if (ConnectedClients.ContainsKey(message.Addressee))
+                var thread = new Thread(() =>
                 {
-                    var addresseeStream = ConnectedClients[message.Addressee].GetStream();
-                    BinaryFormatter.Serialize(addresseeStream, message);
-                    message.IsDelivered = true;
-                }
-                else
-                {
-                    var dispatcherServiceClient = new Shared.DispatcherServiceReference.DispatcherServiceClient(
-                        new BasicHttpBinding(BasicHttpSecurityMode.None),
-                        new EndpointAddress("http://localhost:8080/dispatcher"));
-                    var targetServerEndPoint = dispatcherServiceClient.GetServerByClient(message.Addressee);
-                    
-                }
+                    var networkStream = tcpClient.GetStream();
 
+                    while (true)
+                    {
+                        var dataObject = BinaryFormatter.Deserialize(networkStream);
+
+                        if (dataObject is AccessKey accessKey)
+                        {
+                            if (AccessKeys.Contains(accessKey))
+                                ConnectedClients[accessKey.UserId] = tcpClient;
+                            else
+                                tcpClient.Close();
+
+                            break;
+                        }
+
+                        if (dataObject is Message message)
+                        {
+                            if (!ConnectedClients.ContainsKey(message.Sender) &&
+                                !ConnectedClients.ContainsKey(message.Addressee))
+                                tcpClient.Close();
+
+                            var chatContext = new ChatContext();
+                            chatContext.Messages.Add(message);
+
+                            if (ConnectedClients.ContainsKey(message.Addressee))
+                            {
+                                var addresseeStream = ConnectedClients[message.Addressee].GetStream();
+                                BinaryFormatter.Serialize(addresseeStream, message);
+                                message.IsDelivered = true;
+                            }
+                            else
+                            {
+                                var targetServerEndPoint = DispatcherServiceClient.GetServerByClient(message.Addressee);
+                                var chatServiceClient = new ChatServiceClient(
+                                    new BasicHttpBinding(BasicHttpSecurityMode.None),
+                                    new EndpointAddress(
+                                        $"http://{targetServerEndPoint.Address}:{targetServerEndPoint.Port}/chatservice"));
+                            }
+                        }
+                    }
+                });
             }
+        }
+
+        public void Start()
+        {
+            DispatcherNotifierTimer.Start();
+
+            ListenerThread.Start();
+        }
+
+        public void Stop()
+        {
 
         }
 
@@ -108,6 +156,12 @@ namespace Trrp4.Server
         public void RevokeAccessKey(AccessKey accessKey)
         {
             AccessKeys.Remove(accessKey);
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable)DispatcherServiceClient)?.Dispose();
+            DispatcherNotifierTimer?.Dispose();
         }
     }
 }

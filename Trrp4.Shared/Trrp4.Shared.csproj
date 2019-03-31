@@ -43,6 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\AuthServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ChatServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\DispatcherServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -55,6 +65,41 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Connected Services\AuthServiceReference\AuthServer.wsdl" />
+    <None Include="Connected Services\AuthServiceReference\authservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthServiceReference\authservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthServiceReference\authservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthServiceReference\authservice3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthServiceReference\authservice4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthServiceReference\authservice5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthServiceReference\authservice6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthServiceReference\Trrp4.Shared.AuthServiceReference.AccessKey.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ChatServiceReference\ChatServer.wsdl" />
+    <None Include="Connected Services\ChatServiceReference\chatservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatServiceReference\chatservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatServiceReference\chatservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\DispatcherServiceReference\Dispatcher.wsdl" />
     <None Include="Connected Services\DispatcherServiceReference\dispatcher.xsd">
       <SubType>Designer</SubType>
@@ -74,6 +119,8 @@
     <None Include="Properties\DataSources\System.Net.IPEndPoint.datasource" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\AuthServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\ChatServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\DispatcherServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +134,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\DispatcherServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatServiceReference\chatservice.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ChatServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AuthServiceReference\authservice.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AuthServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AuthServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\AuthServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

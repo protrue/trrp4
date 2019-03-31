@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{239159FF-F6C8-45E6-B328-B60B2266B73F}</ProjectGuid>
+    <ProjectGuid>{00B869D9-F3E0-4310-A78D-748A471B1F85}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Trrp4.Client</RootNamespace>
     <AssemblyName>Trrp4.Client</AssemblyName>
