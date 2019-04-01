@@ -139,9 +139,9 @@ namespace Trrp4.Dispatcher
         {
             return
                 ChatServersLoad
-                    .OrderBy((pair => pair.Value))
+                    .OrderBy(pair => pair.Value)
                     .Take(count)
-                    .Select(pair => pair.Key)
+                    .Select(pair => new IPEndPoint(pair.Key.Address, pair.Key.Port + 1))
                     .ToArray();
         }
 
@@ -151,13 +151,16 @@ namespace Trrp4.Dispatcher
                 AuthServersLoad
                     .OrderBy((pair => pair.Value))
                     .Take(count)
-                    .Select(pair => pair.Key)
+                    .Select(pair => new IPEndPoint(pair.Key.Address, pair.Key.Port + 1))
                     .ToArray();
+
         }
 
         public IPEndPoint GetServerByClient(int clientId)
         {
-            return ClientServerMap[clientId];
+            var notifierEndPoint = ClientServerMap[clientId];
+            var serviceEndpoint = new IPEndPoint(notifierEndPoint.Address, notifierEndPoint.Port + 2);
+            return serviceEndpoint;
         }
     }
 }

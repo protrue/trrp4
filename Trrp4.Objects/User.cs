@@ -17,6 +17,7 @@ namespace Trrp4.Objects
         public int Id { get; set; }
 
         [Index(IsUnique = true)]
+        [MaxLength(50)]
         public string Login { get; set; }
 
         [StringLength(maximumLength:64)]
