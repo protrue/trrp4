@@ -48,6 +48,8 @@ namespace Trrp4.Server
             AddresseeRoutes = new Dictionary<int, IPEndPoint>();
             BinaryFormatter = new BinaryFormatter();
 
+            AccessKeys = new List<AccessKey>();
+
             NotifierEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), BasePort);
             ListenerEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), BasePort + 1);
             ServiceEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), BasePort + 2);

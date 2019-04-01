@@ -91,6 +91,9 @@
     <None Include="Connected Services\AuthServiceReference\Trrp4.Shared.AuthServiceReference.AccessKey.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\AuthServiceReference\Trrp4.Shared.AuthServiceReference.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ChatServiceReference\ChatServer.wsdl" />
     <None Include="Connected Services\ChatServiceReference\chatservice.xsd">
       <SubType>Designer</SubType>

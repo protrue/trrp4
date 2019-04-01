@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure.Annotations;
 
 namespace Trrp4.Objects
 {
+    [Serializable]
     public class Message
     {
         [Key]

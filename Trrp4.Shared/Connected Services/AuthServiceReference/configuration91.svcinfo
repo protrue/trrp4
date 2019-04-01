@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="ayVOX9iow+jlFluEqrHUc78Wy0g=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Pg767TiTmfAEQaHfYUHdXXEBMeY=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IAuthService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IAuthService" contract="AuthServiceReference.IAuthService" bindingType="basicHttpBinding" address="http://localhost:8085/authservice" bindingConfiguration="BasicHttpBinding_IAuthService">
+    <endpoint name="BasicHttpBinding_IAuthService" contract="AuthServiceReference.IAuthService" bindingType="basicHttpBinding" address="http://127.0.0.1:9001/authservice" bindingConfiguration="BasicHttpBinding_IAuthService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8085/authservice</serializedValue>
+          <serializedValue>http://127.0.0.1:9001/authservice</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

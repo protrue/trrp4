@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,10 +51,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Trrp4.Objects\Trrp4.Objects.csproj">
+      <Project>{83670716-ad10-444b-878b-7e9a35ede32e}</Project>
+      <Name>Trrp4.Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Trrp4.Shared\Trrp4.Shared.csproj">
       <Project>{6baf449f-c01e-42ec-b627-7b0d18d5110b}</Project>
       <Name>Trrp4.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

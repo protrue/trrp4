@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using Microsoft.Win32;
 using Trrp4.Objects;
 
 namespace Trrp4.Server
@@ -20,5 +21,8 @@ namespace Trrp4.Server
 
         [OperationContract]
         void Logout(AccessKey accessKey, IPEndPoint chatServer);
+
+        [OperationContract]
+        User[] GetUsers();
     }
 }

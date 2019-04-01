@@ -38,7 +38,7 @@ namespace Trrp4.Server
             DispatcherEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 7000);
             NotifierEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), BasePort);
             ServiceEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), BasePort + 1);
-            
+
             DispatcherNotifyPeriodMilliseconds = 3000;
             DispatcherNotifierTimer = new Timer(DispatcherNotifyPeriodMilliseconds);
             DispatcherNotifierTimer.Elapsed += NotifyDispatcher;
@@ -123,7 +123,8 @@ namespace Trrp4.Server
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                //Console.WriteLine(exception);
+                Console.WriteLine("Registration fail");
                 return false;
             }
 
@@ -153,7 +154,7 @@ namespace Trrp4.Server
                 {
                     var accessKey = new AccessKey { Key = Guid.NewGuid(), UserId = userFromDb.Id, Expires = DateTime.Now.AddDays(1) };
                     var chatServiceClient = new ChatServiceClient(new BasicHttpBinding(BasicHttpSecurityMode.None),
-                        new EndpointAddress($"http://{chatServer.Address}:{chatServer.Port}/chatserver"));
+                        new EndpointAddress($"http://{chatServer.Address}:{chatServer.Port + 1}/chatservice"));
                     chatServiceClient.AddAccessKey(new Shared.ChatServiceReference.AccessKey() { Key = accessKey.Key, UserId = accessKey.UserId, Expires = accessKey.Expires });
                     Console.WriteLine($"AuthServer: {accessKey.UserId} {accessKey.Key} {accessKey.Expires}");
                     return accessKey;
@@ -161,7 +162,8 @@ namespace Trrp4.Server
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                //Console.WriteLine(exception);
+                Console.WriteLine("Auth fail");
             }
 
             return null;
@@ -170,6 +172,14 @@ namespace Trrp4.Server
         public void Logout(AccessKey accessKey, IPEndPoint chatServer)
         {
 
+        }
+
+        public User[] GetUsers()
+        {
+            var chatContext = new ChatContext();
+            var users = chatContext.Users.ToArray();
+            chatContext.Dispose();
+            return users.Select(u => new User() { Id = u.Id, Login = u.Login }).ToArray();
         }
     }
 }
