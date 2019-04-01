@@ -66,6 +66,8 @@
       <DependentUpon>201904010448193_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="OpenDataRequest.cs" />
+    <Compile Include="OpenDataResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
