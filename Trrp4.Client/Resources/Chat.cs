@@ -8,13 +8,14 @@ namespace Trrp4.Client.Resources
 {
     public class Chat
     {
+        public Member User { get; }
         public Member Member { get; }
         public string LastMessage { get; }
         public List<ChatMessage> Messages { get; } = new List<ChatMessage>();
         
-        public Chat(Member _member, string _lastMessage)
+        public Chat(Member _user, Member _member, string _lastMessage)
         {
-            //ChatConnection = new ChatConnection();
+            User = _user;
             Member = _member;
             LastMessage = _lastMessage;
         }

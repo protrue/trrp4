@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Net;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,16 @@ namespace Trrp4.Client
     {
         DispatherConnection DispatherConnection;
         AuthorizationServerConection AuthorizationServerConection;
-       
+        ChatServerConnection ChatServerConnection;
+
         public AuthorizationForm()
         {
             InitializeComponent();
             try
             {
                 DispatherConnection = new DispatherConnection();
-                AuthorizationServerConection = new AuthorizationServerConection(DispatherConnection.GetAuthorizationServerAddress());
+                AuthorizationServerConection = new AuthorizationServerConection(DispatherConnection.GetAuthorizationServerAddress(1));
+                ChatServerConnection = new ChatServerConnection(DispatherConnection.GetChatServerAddress(2));
             }
             catch (Exception e)
             {
@@ -43,20 +46,8 @@ namespace Trrp4.Client
 
         private void authBtn_Click(object sender, EventArgs e)
         {
-            //Проверить соиденение с комутатором
-            //Есть: получить адрес сервера авторизации, если еще не получен
-            //Нет: сообщить о невозможности подключиться к серверу авторизации
-            //Отправить через JRPC логин и пароль среверу авторизации (возможно в зашифрованном виде)
-            //Получить ответ (пока ответ не будет получен, все действия заблокированны)
-            //Ответ положительный: открыть основное окно приложения
-            //Ответ отрицательный: сообщить о неправильном логине и пароле
-            
-            AuthorizationServerConection.Authenticate(loginTB.Text, passwordTB.Text);
-            //Это должно возвращать 
-            var address = "адрес чат-сервера";
-            var token = "токен для подключения";
-            var chatServerConection = new ChatServerConnection(address, token);
-            var form = new MainForm(DispatherConnection, AuthorizationServerConection, chatServerConection);
+            var token = AuthorizationServerConection.Authenticate(loginTB.Text, passwordTB.Text, ChatServerConnection.ServerAddresses[0]);
+            var form = new MainForm(DispatherConnection, AuthorizationServerConection, ChatServerConnection, token, loginTB.Text);
             Hide();    
             form.ShowDialog();
             Close();

@@ -9,19 +9,13 @@ namespace Trrp4.Client.Resources
 {
     public class Member
     {
-        public string Id { get;}
+        public int Id { get;}
         public string Name { get; set; }
-        public string Address { get; set; }
-        public int Characteristic { get; set; }
-        public Bitmap Photo { get; set; }
-        //Возможно нужны еще поля
 
-        public Member(Bitmap _photo, string _name, string _address, int _characteristic)
+        public Member(int id, string name)
         {
-            Photo = _photo;
-            Name = _name;
-            Address = _address;
-            Characteristic = _characteristic;
+            Id = id;
+            Name = name;    
         }
     }
 }

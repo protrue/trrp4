@@ -15,6 +15,7 @@ namespace Trrp4.Client
     {
         Chat Chat;
         Member user;
+        Member resiver;
         ChatServerConnection chatServerConnection;
 
         public ChatForm(Chat chat)
@@ -22,10 +23,12 @@ namespace Trrp4.Client
             Chat = chat;
         }
 
-        public ChatForm(Chat _chat, Member user, ChatServerConnection chatServerConnection)
+        public ChatForm(Chat _chat, Member _user, Member _reciver, ChatServerConnection chatServerConnection)
         {
             InitializeComponent();
             Chat = _chat;
+            user = _user;
+            resiver = _reciver;
         }
 
         public void fillMessageList()
@@ -42,11 +45,12 @@ namespace Trrp4.Client
 
         private void messageSendBtn_Click(object sender, EventArgs e)
         {
-            var message = new ChatMessage(user, messageTB.Text);
+            var message = new ChatMessage(user, resiver, messageTB.Text);
             Chat.AddMessage(message);
             var item = new ListViewItem(messageTB.Text);
             item.Tag = message;
             messagesLV.Items.Add(item);
+            chatServerConnection.SendMessage(message);
         }
 
         private void messageTB_TextChanged(object sender, EventArgs e)

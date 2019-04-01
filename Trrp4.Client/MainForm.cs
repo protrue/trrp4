@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trrp4.Client.Resources;
+using Trrp4.Objects;
 
 namespace Trrp4.Client
 {
@@ -22,37 +23,42 @@ namespace Trrp4.Client
         List<Member> Members;
 
         public MainForm(DispatherConnection dispatherConnection, AuthorizationServerConection authorizationServerConection,
-            ChatServerConnection chatServerConnection)
+            ChatServerConnection chatServerConnection, AccessKey token, string login)
         {
             InitializeComponent();
             AuthorizationServerConection = authorizationServerConection;
             DispatherConnection = dispatherConnection;
             ChatServerConnection = chatServerConnection;
             Members = authorizationServerConection.GetMemberList();
-            GetChats();
-            //запросить у сервера авторизации все мои чаты и список народу
+            UserInfo = new Member(Members.Find(x => x.Name == login).Id, login);
+            var messages = ChatServerConnection.InsertKey(token);
+            GetChats(messages);
         }
 
-        private void GetChats()
-        {
-            Chats = ChatServerConnection.GetChats();
-            foreach(var chat in Chats)
+        private void GetChats(Objects.Message[] messages)
+        { 
+            foreach(var message in messages)
             {
-                var item = new ListViewItem("1");
-                item.Tag = chat;
-                chatsLV.Items.Add(item);
+                var index = Chats.FindIndex(x => x.Member.Id == message.Addressee || x.Member.Id == message.Sender);
+                if(index < 0)
+                {
+                    var chat = new Chat(UserInfo, Members.Find(x => (x.Id == message.Sender && x.Id != UserInfo.Id) ||
+                     (x.Id == message.Addressee && x.Id != UserInfo.Id)), "last");
+                    Chats.Add(chat);
+                    index = Chats.Count - 1;
+                    var item = new ListViewItem("1");
+                    item.Tag = chat;
+                    chatsLV.Items.Add(item);
+                }
+                Chats[index].Messages.Add(new ChatMessage(Members.Find(x => x.Id == message.Sender),
+                        Members.Find(x => x.Id == message.Addressee), message.Text));
             }
         }
 
         private void chatBtn_Click(object sender, EventArgs e)
         {
-            //Здесь должне создаваться новый чат
-            //Сначала серверу посылается запрос на создание с возвратом id
-            //Если успешно, то создается и открывается чат
-            //Если нет, то вылетает ошибка
-            var item = new ListViewItem("");
-            var member = new Member(new Bitmap("dsf"), "name", "address", 10);
-            var chat = new Chat(member, "last");
+            var item = new ListViewItem(CurrentMember.Name + "\t" + "");
+            var chat = new Chat(UserInfo, CurrentMember, "");
             item.Tag = chat;
             chatsLV.Items.Add(item);
             var newChatForm = new ChatForm(chat);
@@ -63,7 +69,7 @@ namespace Trrp4.Client
             Members.RemoveAt(0);
             if(Members.Count < 1)
             {
-                //как-то сказать что список закончился
+                MessageBox.Show("Пользователей больше нет");
             }
             else
             {
@@ -71,14 +77,6 @@ namespace Trrp4.Client
                 if (Members.Count == 1)
                     nextMemberBtn.Enabled = false;
             }
-        }
-
-        private void changePhotoBtn_Click(object sender, EventArgs e)
-        {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "*.png, *.jpg";
-            dialog.ShowDialog();
-            MessageBox.Show(dialog.FileName);
         }
 
         private void chatsLV_DoubleClick(object sender, EventArgs e)

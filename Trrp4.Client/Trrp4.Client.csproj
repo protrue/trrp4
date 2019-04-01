@@ -34,7 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,7 +80,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\Member.cs" />
-    <Compile Include="Resources\Message.cs" />
+    <Compile Include="Resources\ChatMessage.cs" />
     <EmbeddedResource Include="AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +116,22 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trrp4.Dispatcher\Trrp4.Dispatcher.csproj">
+      <Project>{2fb12aa5-a7dc-44f0-87eb-146942064cf5}</Project>
+      <Name>Trrp4.Dispatcher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trrp4.Objects\Trrp4.Objects.csproj">
+      <Project>{83670716-ad10-444b-878b-7e9a35ede32e}</Project>
+      <Name>Trrp4.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trrp4.Server\Trrp4.Server.csproj">
+      <Project>{a73e115c-ce1f-4a9f-bce9-7747591c7f05}</Project>
+      <Name>Trrp4.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
