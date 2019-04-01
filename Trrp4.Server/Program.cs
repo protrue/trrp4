@@ -22,17 +22,18 @@ namespace Trrp4.Server
             switch (mode)
             {
                 case 0:
-                    Console.WriteLine("ChatServer: started");
-
                     var chatServer = new ChatServer();
+                    chatServer.AutoSetupPorts();
                     chatServer.Start();
-                    
+
+                    Console.WriteLine($"ChatServer: started\n{chatServer.NotifierEndPoint}\n{chatServer.ListenerEndPoint}\n{chatServer.ServiceEndPoint}");
+
                     serviceMetadataBehavior = new ServiceMetadataBehavior()
                     {
                         HttpGetEnabled = true,
                         MetadataExporter = { PolicyVersion = PolicyVersion.Policy15 },
                     };
-                    serviceHost = new ServiceHost(chatServer, new Uri("http://localhost:8085/chatservice"));
+                    serviceHost = new ServiceHost(chatServer, new Uri($"http://{chatServer.ServiceEndPoint.Address}:{chatServer.ServiceEndPoint.Port}/chatservice"));
                     serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);
                     serviceHost.AddServiceEndpoint(typeof(IChatService), new BasicHttpBinding(), string.Empty);
                     serviceHost.Open();
@@ -43,16 +44,18 @@ namespace Trrp4.Server
                     chatServer.Stop();
                     break;
                 case 1:
-                    Console.WriteLine("AuthServer: started");
-
                     var authServer = new AuthServer();
+                    authServer.AutoSetupPorts();
+                    authServer.Start();
+
+                    Console.WriteLine($"AuthServer: started\n{authServer.NotifierEndPoint}\n{authServer.ServiceEndPoint}");
 
                     serviceMetadataBehavior = new ServiceMetadataBehavior()
                     {
                         HttpGetEnabled = true,
                         MetadataExporter = { PolicyVersion = PolicyVersion.Policy15 },
                     };
-                    serviceHost = new ServiceHost(authServer, new Uri("http://localhost:8085/authservice"));
+                    serviceHost = new ServiceHost(authServer, new Uri($"http://{authServer.ServiceEndPoint.Address}:{authServer.ServiceEndPoint.Port}/authservice"));
                     serviceHost.Description.Behaviors.Add(serviceMetadataBehavior);
                     serviceHost.AddServiceEndpoint(typeof(IAuthService), new BasicHttpBinding(), string.Empty);
                     serviceHost.Open();
@@ -60,6 +63,7 @@ namespace Trrp4.Server
                     Console.WriteLine("AuthServer: service started");
                     Console.ReadKey();
                     serviceHost.Close();
+                    authServer.Stop();
                     break;
             }
         }
