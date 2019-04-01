@@ -119,7 +119,7 @@ namespace Trrp4.Server
                 chatContext.SaveChanges();
                 chatContext.Dispose();
 
-                Console.WriteLine($"AuthServer: {user.Id} {user.Login} {user.Hash} {user.Salt}");
+                Console.WriteLine($"Register: {user.Id} {user.Login} {user.Hash} {user.Salt}");
             }
             catch (Exception exception)
             {
@@ -156,7 +156,7 @@ namespace Trrp4.Server
                     var chatServiceClient = new ChatServiceClient(new BasicHttpBinding(BasicHttpSecurityMode.None),
                         new EndpointAddress($"http://{chatServer.Address}:{chatServer.Port + 1}/chatservice"));
                     chatServiceClient.AddAccessKey(new Shared.ChatServiceReference.AccessKey() { Key = accessKey.Key, UserId = accessKey.UserId, Expires = accessKey.Expires });
-                    Console.WriteLine($"AuthServer: {accessKey.UserId} {accessKey.Key} {accessKey.Expires}");
+                    Console.WriteLine($"Auth: {accessKey.UserId} {accessKey.Key} {accessKey.Expires}");
                     return accessKey;
                 }
             }

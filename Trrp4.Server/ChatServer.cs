@@ -5,9 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.ServiceModel;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
 using Trrp4.Objects;
 using Trrp4.Shared;
@@ -57,7 +55,7 @@ namespace Trrp4.Server
 
             ListenerThread = new Thread(Listen);
             ListenerBacklog = 4;
-            
+
             DispatcherServiceClient = new DispatcherServiceClient(
                 new BasicHttpBinding(BasicHttpSecurityMode.None),
                 new EndpointAddress($"http://{DispatcherEndPoint.Address}:{DispatcherEndPoint.Port}/dispatcher"));
@@ -117,61 +115,95 @@ namespace Trrp4.Server
                 {
                     var networkStream = tcpClient.GetStream();
                     var chatContext = new ChatContext();
+                    var currentUserId = -1;
+                    AccessKey accessKey = null;
 
-                    while (true)
+                    try
                     {
-                        var dataObject = BinaryFormatter.Deserialize(networkStream);
-
-                        if (dataObject is AccessKey accessKey && !ConnectedClients.ContainsKey(accessKey.UserId))
+                        while (true)
                         {
-                            if (AccessKeys.Contains(accessKey))
-                            {
-                                ConnectedClients[accessKey.UserId] = tcpClient;
-                                var undeliveredMessages = chatContext.Messages.Where(m => m.Addressee == accessKey.UserId && !m.IsDelivered).ToArray();
-                                BinaryFormatter.Serialize(networkStream, undeliveredMessages);
-                            }
-                            else
-                                tcpClient.Close();
+                            var dataObject = BinaryFormatter.Deserialize(networkStream);
 
-                            break;
-                        }
-
-                        if (dataObject is Message message)
-                        {
-                            if (!ConnectedClients.ContainsKey(message.Sender) &&
-                                !ConnectedClients.ContainsKey(message.Addressee))
+                            if ((dataObject is AccessKey || dataObject is Shared.AuthServiceReference.AccessKey))
                             {
-                                tcpClient.Close();
-                                break;
-                            }
+                                accessKey = (Shared.AuthServiceReference.AccessKey)dataObject;
 
-                            chatContext.Messages.Add(message);
+                                currentUserId = accessKey.UserId;
 
-                            if (ConnectedClients.ContainsKey(message.Addressee))
-                            {
-                                var addresseeStream = ConnectedClients[message.Addressee].GetStream();
-                                BinaryFormatter.Serialize(addresseeStream, message);
-                                message.IsDelivered = true;
-                            }
-                            else
-                            {
-                                var targetServerEndPoint = DispatcherServiceClient.GetServerByClient(message.Addressee);
-                                var chatServiceClient = new ChatServiceClient(
-                                    new BasicHttpBinding(BasicHttpSecurityMode.None),
-                                    new EndpointAddress(
-                                        $"http://{targetServerEndPoint.Address}:{targetServerEndPoint.Port}/chatservice"));
-                                chatServiceClient.RedirectMessage(new Shared.ChatServiceReference.Message()
+                                if (ConnectedClients.ContainsKey(accessKey.UserId))
+                                    continue;
+
+                                if (AccessKeys.FirstOrDefault(ak => ak.Key == accessKey.Key) != null)
                                 {
-                                    Addressee = message.Addressee,
-                                    Sender = message.Sender,
-                                    Id = message.Id,
-                                    Text = message.Text,
-                                    IsDelivered = message.IsDelivered
-                                });
+                                    Console.WriteLine(
+                                        $"Access granted {accessKey.UserId} {accessKey.Key} {accessKey.Expires}");
+                                    ConnectedClients[accessKey.UserId] = tcpClient;
+                                    var undeliveredMessages = chatContext.Messages
+                                        .Where(m => m.Addressee == accessKey.UserId && !m.IsDelivered).ToArray();
+                                    Console.WriteLine($"Undelivered messages: {undeliveredMessages.Length}");
+                                    BinaryFormatter.Serialize(networkStream, undeliveredMessages);
+                                }
+                                else
+                                {
+                                    Console.WriteLine(
+                                        $"Bad access key {accessKey.UserId} {accessKey.Key} {accessKey.Expires}");
+                                    throw new ArgumentException("Bad key");
+                                }
                             }
 
-                            chatContext.SaveChanges();
+                            if (dataObject is Message message)
+                            {
+                                Console.WriteLine(
+                                    $"Message received {message.Id} {message.Sender} {message.Addressee} {message.Text} {message.IsDelivered}");
+
+                                if (!ConnectedClients.ContainsKey(message.Sender) &&
+                                    !ConnectedClients.ContainsKey(message.Addressee))
+                                {
+                                    continue;
+                                }
+
+                                chatContext.Messages.Add(message);
+                                chatContext.SaveChanges();
+
+                                if (ConnectedClients.ContainsKey(message.Addressee))
+                                {
+                                    var addresseeStream = ConnectedClients[message.Addressee].GetStream();
+                                    BinaryFormatter.Serialize(addresseeStream, message);
+                                    message.IsDelivered = true;
+                                    Console.WriteLine(
+                                        $"Message sent {message.Id} {message.Sender} {message.Addressee} {message.Text} {message.IsDelivered}");
+                                }
+                                else
+                                {
+                                    var targetServerEndPoint =
+                                        DispatcherServiceClient.GetServerByClient(message.Addressee);
+                                    var chatServiceClient = new ChatServiceClient(
+                                        new BasicHttpBinding(BasicHttpSecurityMode.None),
+                                        new EndpointAddress(
+                                            $"http://{targetServerEndPoint.Address}:{targetServerEndPoint.Port}/chatservice"));
+                                    chatServiceClient.RedirectMessage(new Shared.ChatServiceReference.Message()
+                                    {
+                                        Addressee = message.Addressee,
+                                        Sender = message.Sender,
+                                        Id = message.Id,
+                                        Text = message.Text,
+                                        IsDelivered = message.IsDelivered
+                                    });
+
+                                    Console.WriteLine(
+                                        $"Message redirected {message.Id} {message.Sender} {message.Addressee} {message.Text} {message.IsDelivered}");
+                                }
+
+                                chatContext.SaveChanges();
+                            }
                         }
+                    }
+                    catch (Exception exception)
+                    {
+                        var accessKeyToRemove = AccessKeys.First(ak => ak.Key == accessKey.Key);
+                        AccessKeys.Remove(accessKeyToRemove);
+                        ConnectedClients.Remove(currentUserId);
+                        Console.WriteLine($"Lost connection with user {currentUserId}");
                     }
 
                     chatContext.Dispose();
@@ -205,10 +237,13 @@ namespace Trrp4.Server
             chatContext.Messages.Attach(message);
             chatContext.SaveChanges();
             chatContext.Dispose();
+
+            Console.WriteLine($"Message sent after redirect {message.Id} {message.Sender} {message.Addressee} {message.Text} {message.IsDelivered}");
         }
 
         public void AddAccessKey(AccessKey accessKey)
         {
+            Console.WriteLine($"Add access key {accessKey.UserId} {accessKey.Key} {accessKey.Expires}");
             AccessKeys.Add(accessKey);
         }
 

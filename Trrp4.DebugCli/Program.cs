@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -40,9 +41,21 @@ namespace Trrp4.DebugCli
 
             binaryFormatter.Serialize(networkStream, accessKey);
 
-            var m = new Message() { Addressee = users[0].Id, Sender = accessKey.UserId };
+            var message = new Message() { Addressee = users[0].Id, Sender = accessKey.UserId, Text = "Hello"};
 
-            binaryFormatter.Serialize(networkStream, m);
+            binaryFormatter.Serialize(networkStream, message);
+
+            var undelivered = (Message[])binaryFormatter.Deserialize(networkStream);
+
+            Console.WriteLine(undelivered.Length);
+            foreach (var m in undelivered)
+                Console.WriteLine(m.Text);
+
+            var received = (Message)binaryFormatter.Deserialize(networkStream);
+
+            Console.WriteLine(received.Text);
+
+            tcpClient.Close();
 
             Console.ReadKey();
         }

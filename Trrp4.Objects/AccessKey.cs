@@ -18,5 +18,16 @@ namespace Trrp4.Objects
 
         [DataMember]
         public DateTime Expires { get; set; }
+
+        public static implicit operator AccessKey(Shared.AuthServiceReference.AccessKey accessKeyFromReference) 
+        {
+            var accessKey = new AccessKey
+            {
+                UserId = accessKeyFromReference.UserId,
+                Key = accessKeyFromReference.Key,
+                Expires = accessKeyFromReference.Expires
+            };
+            return accessKey;
+        }
     }
 }
